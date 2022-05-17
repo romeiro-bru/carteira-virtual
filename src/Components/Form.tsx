@@ -24,13 +24,13 @@ export function Form({ accountInitVal }: AccountInitVal) {
       <div className="flex">
         <div>
           <label className="block" htmlFor="busd-compra">Você comprará:</label>
-          <input className="w-2/5 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
+          <input className="w-2/4 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
           <span className="p-3 border">BRL</span>
         </div>
 
         <div>
           <label className="block" htmlFor="bitcoin-recebe">Você receberá:</label>
-          <input className="w-2/5 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
+          <input className="w-2/4 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
           <span className="p-3 border">BUSD</span>
         </div>
       </div>

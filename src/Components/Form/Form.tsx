@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+// const bitcoin = require('../../assets/icons/bitcoin.png');
 
 const apiBusd = "https://economia.awesomeapi.com.br/all/USD-BRL";
 
@@ -12,13 +13,17 @@ type ApiBUSD = {
 type AccBalance = {
   accBalance: number;
   setAccBalance: React.Dispatch<number>;
+  btcAmount: number;
+  setBtcAmount: React.Dispatch<number>;
+  busdAmount: number;
+  setBusdAmount: React.Dispatch<number>;
   btcPrice: string
 }
 
-export function Form({ btcPrice, accBalance, setAccBalance }: AccBalance) {
+export function Form({ busdAmount, setBusdAmount, btcAmount, setBtcAmount, btcPrice, accBalance, setAccBalance }: AccBalance) {
   const [input, setInput] = useState("")
   const [selectedCoin, setSelectedCoin] = useState("BTC")
-  const [coinAmount, setCoinAmount] = useState<number>()
+  const [coinAmount, setCoinAmount] = useState(0)
   const [busdPrice, setBusdPrice] = useState("")
 
   useEffect(() => {
@@ -42,6 +47,8 @@ export function Form({ btcPrice, accBalance, setAccBalance }: AccBalance) {
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
     setAccBalance(accBalance - parseFloat(input))
+    if (selectedCoin === "BTC") { setBtcAmount(coinAmount) }
+    if (selectedCoin === "BUSD") { setBusdAmount(coinAmount) }
   }
 
   return (
@@ -57,7 +64,9 @@ export function Form({ btcPrice, accBalance, setAccBalance }: AccBalance) {
           <input value={coinAmount} readOnly className="w-2/4 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
 
           <select value={selectedCoin} onChange={(e) => setSelectedCoin(e.target.value)} name="cryptcoin" className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
-            <option value="BTC">BTC</option>
+            <option value="BTC">
+              BTC
+            </option>
             <option value="BUSD">BUSD</option>
           </select>
         </div>

@@ -11,6 +11,15 @@
 
 <img height="340" src="https://user-images.githubusercontent.com/56081906/169153676-9a6a3c77-dc69-4a64-8b83-b222ce5378d9.gif" />
 
+## Objetivos
+- Realizar cadastro
+- Realizar login e logout
+- Comprar criptomoedas
+- Vender criptomoedas
+- Negociar criptomoedas
+- Visualizar o saldo individual de cada moeda
+- Visualizar extrato único da conta
+
 ## API 📑
 [Cotação Bitcoin](https://www.mercadobitcoin.net/api/BTC/ticker)
 <br>

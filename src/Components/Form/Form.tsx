@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect, EffectCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const apiBusd = "https://economia.awesomeapi.com.br/all/USD-BRL";
 
@@ -47,16 +47,16 @@ export function Form({ btcPrice }: AccountVal) {
           <span className="p-3 border">BRL</span>
         </div>
         <div>
-          <label className="block" htmlFor="bitcoin-recebe">Você receberá:</label>
+          <label className="block">Você receberá:</label>
           <input value={coinAmount} readOnly className="w-2/4 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
 
-          <select value={selectedCoin} onChange={(e) => setSelectedCoin(e.target.value)} name="cryptcoin" className="py-3.5 bg-[#68ed9a] rounded px-1">
+          <select value={selectedCoin} onChange={(e) => setSelectedCoin(e.target.value)} name="cryptcoin" className="py-3.5 bg-primary-color rounded px-1">
             <option value="BTC">BTC</option>
             <option value="BUSD">BUSD</option>
           </select>
         </div>
       </div>
-      <button className="absolute top-3/4 left-0 py-4 px-8 rounded-full bg-[#68ed9b] hover:bg-[#5ace7e] duration-100 text-slate-800 font-bold">Comprar</button>
+      <button className="absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">Comprar</button>
     </form>
   );
 }

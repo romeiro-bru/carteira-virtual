@@ -7,6 +7,7 @@
   <img  src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"  height="25" alt="typescript">
 </p>
 
+> O objetivo é construir uma aplicação onde o usuário poderá negociar criptomoedas.
 
 ## API 📑
 [Cotação Bitcoin](https://www.mercadobitcoin.net/api/BTC/ticker)

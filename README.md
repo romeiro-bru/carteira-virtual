@@ -9,6 +9,8 @@
 
 > O objetivo é construir uma aplicação onde o usuário poderá negociar criptomoedas.
 
+<img height="340" src="https://user-images.githubusercontent.com/56081906/169153676-9a6a3c77-dc69-4a64-8b83-b222ce5378d9.gif" />
+
 ## API 📑
 [Cotação Bitcoin](https://www.mercadobitcoin.net/api/BTC/ticker)
 <br>

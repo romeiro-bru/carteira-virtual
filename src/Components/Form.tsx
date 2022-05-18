@@ -1,8 +1,17 @@
-type AccountInitVal = {
-  accountInitVal: number;
+import { useState } from 'react';
+
+type AccountVal = {
+  accountVal: number;
+  btcPrice: string
 }
 
-export function Form({ accountInitVal }: AccountInitVal) {
+export function Form({ btcPrice, accountVal }: AccountVal) {
+  const [buyBtc, setBuyBtc] = useState<number>()
+
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBuyBtc(parseFloat(e.target.value) / parseFloat(btcPrice))
+  }
 
   return (
     <form className="relative">
@@ -10,12 +19,12 @@ export function Form({ accountInitVal }: AccountInitVal) {
       <div className="flex">
         <div>
           <label className="block" htmlFor="bitcoin-compra">Você comprará:</label>
-          <input className="w-2/4 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
+          <input onChange={handleChange} className="w-2/4 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
           <span className="p-3 border">BRL</span>
         </div>
         <div>
           <label className="block" htmlFor="bitcoin-recebe">Você receberá:</label>
-          <input className="w-2/4 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
+          <input value={buyBtc} readOnly className="w-2/4 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
           <span className="p-3 border">BTC</span>
         </div>
       </div>

@@ -15,10 +15,10 @@ type AccountVal = {
 }
 
 export function Form({ btcPrice }: AccountVal) {
-  const [input, SetInput] = useState<string>("")
-  const [selectedCoin, setSelectedCoin] = useState<string>("BTC")
+  const [input, setInput] = useState("")
+  const [selectedCoin, setSelectedCoin] = useState("BTC")
   const [coinAmount, setCoinAmount] = useState<number>()
-  const [busdPrice, setBusdPrice] = useState<string>("")
+  const [busdPrice, setBusdPrice] = useState("")
 
   useEffect(() => {
     const fetchBUSDPrice = async () => {
@@ -35,7 +35,7 @@ export function Form({ btcPrice }: AccountVal) {
   }, [selectedCoin, input])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    SetInput(e.target.value)
+    setInput(e.target.value)
   }
 
   return (

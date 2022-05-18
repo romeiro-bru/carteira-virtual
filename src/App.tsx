@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Form } from './Components/Form';
+import { Form } from './Components/Form/Form';
 import { Nav } from './Components/Nav';
 import { Header } from './Components/Header';
 
 const apiBtc = "https://www.mercadobitcoin.net/api/BTC/ticker";
-const apiBusd = "https://economia.awesomeapi.com.br/all/USD-BRL";
 
 type ApiBtc = {
   ticker: {
@@ -47,7 +46,7 @@ function App() {
           </aside>
           <Nav />
         </section>
-        <main className="w-2/4 py-4 px-8 bg-white rounded-md shadow-md text-slate-700 text-left">
+        <main className="relative w-2/4 py-4 px-8 bg-white rounded-md shadow-md text-slate-700 text-left">
           <h1 className="mb-9 text-xl font-medium">Compra de Criptomoedas</h1>
           <Form btcPrice={btcPrice} accountVal={accountVal} />
         </main>

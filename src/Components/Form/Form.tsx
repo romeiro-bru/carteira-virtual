@@ -9,12 +9,13 @@ type ApiBUSD = {
   }
 };
 
-type AccountVal = {
-  accountVal: number;
+type AccBalance = {
+  accBalance: number;
+  setAccBalance: React.Dispatch<number>;
   btcPrice: string
 }
 
-export function Form({ btcPrice }: AccountVal) {
+export function Form({ btcPrice, accBalance, setAccBalance }: AccBalance) {
   const [input, setInput] = useState("")
   const [selectedCoin, setSelectedCoin] = useState("BTC")
   const [coinAmount, setCoinAmount] = useState<number>()
@@ -38,8 +39,13 @@ export function Form({ btcPrice }: AccountVal) {
     setInput(e.target.value)
   }
 
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setAccBalance(accBalance - parseFloat(input))
+  }
+
   return (
-    <form className="absolute inset-y-1/4">
+    <form onSubmit={handleSubmit} className="absolute inset-y-1/4">
       <div className="flex">
         <div>
           <label className="block" htmlFor="bitcoin">Você comprará:</label>
@@ -50,7 +56,7 @@ export function Form({ btcPrice }: AccountVal) {
           <label className="block">Você receberá:</label>
           <input value={coinAmount} readOnly className="w-2/4 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
 
-          <select value={selectedCoin} onChange={(e) => setSelectedCoin(e.target.value)} name="cryptcoin" className="py-3.5 bg-primary-color rounded px-1">
+          <select value={selectedCoin} onChange={(e) => setSelectedCoin(e.target.value)} name="cryptcoin" className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
             <option value="BTC">BTC</option>
             <option value="BUSD">BUSD</option>
           </select>

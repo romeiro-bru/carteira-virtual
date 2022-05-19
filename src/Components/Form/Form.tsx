@@ -34,16 +34,11 @@ export function Form({ setBusdAmount, setBtcAmount, btcPrice, accBalance, setAcc
       }
     }
     fetchBUSDPrice()
-    if (selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) / parseFloat(btcPrice)) }
-    if (selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / parseFloat(busdPrice)) }
-    if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) * parseFloat(btcPrice) / parseFloat(btcPrice)) }
-    if (selectedCoinA === selectedCoinB) { setConvertedCurrency(0) }
-    if (selectedCoinA === "BTC" && selectedCoinB === "BUSD") { }
+    if (selectedCoinA === "BRL" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) / parseFloat(btcPrice)) }
+    if (selectedCoinA === "BRL" && selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / parseFloat(busdPrice)) }
+    if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) * parseFloat(busdPrice) / parseFloat(btcPrice)) }
+    if (selectedCoinA === "BTC" && selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / parseFloat(busdPrice) * parseFloat(btcPrice)) }
   }, [input, selectedCoinA, selectedCoinB])
-
-  // input x cot dolar / btc prce
-  // input x cot bitc / usd price ?
-  // console.log(parseFloat(coinAmount.toFixed(8)))
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value)
@@ -71,7 +66,7 @@ export function Form({ setBusdAmount, setBtcAmount, btcPrice, accBalance, setAcc
         </div>
         <div>
           <label className="block">Você receberá:</label>
-          <input value={convertedCurrency.toFixed(8)} readOnly className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
+          <input value={convertedCurrency.toFixed(6)} readOnly className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
 
           <select value={selectedCoinB} onChange={(e) => setSelectedCoinB(e.target.value)} name="cryptcoin" className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
             <option value="BTC">BTC</option>

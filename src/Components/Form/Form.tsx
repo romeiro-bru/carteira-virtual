@@ -38,9 +38,11 @@ export function Form({ setBusdAmount, setBtcAmount, btcPrice, accBalance, setAcc
     if (selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / parseFloat(busdPrice)) }
     if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) * parseFloat(btcPrice) / parseFloat(btcPrice)) }
     if (selectedCoinA === selectedCoinB) { setConvertedCurrency(0) }
+    if (selectedCoinA === "BTC" && selectedCoinB === "BUSD") { }
   }, [input, selectedCoinA, selectedCoinB])
 
   // input x cot dolar / btc prce
+  // input x cot bitc / usd price ?
   // console.log(parseFloat(coinAmount.toFixed(8)))
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +54,6 @@ export function Form({ setBusdAmount, setBtcAmount, btcPrice, accBalance, setAcc
     setAccBalance(accBalance - parseFloat(input))
     if (selectedCoinB === "BTC") { setBtcAmount(convertedCurrency) }
     if (selectedCoinB === "BUSD") { setBusdAmount(convertedCurrency) }
-    if (selectedCoinA === selectedCoinB) { setAccBalance(accBalance) }
   }
 
   return (
@@ -78,7 +79,7 @@ export function Form({ setBusdAmount, setBtcAmount, btcPrice, accBalance, setAcc
           </select>
         </div>
       </div>
-      <button className="absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">Comprar</button>
+      <button disabled={selectedCoinA === selectedCoinB} className="absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">Comprar</button>
     </form>
   );
 }

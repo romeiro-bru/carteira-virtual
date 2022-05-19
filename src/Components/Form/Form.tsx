@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-// const bitcoin = require('../../assets/icons/bitcoin.png');
 
 const apiBusd = "https://economia.awesomeapi.com.br/all/USD-BRL";
 
@@ -13,17 +12,16 @@ type ApiBUSD = {
 type AccBalance = {
   accBalance: number;
   setAccBalance: React.Dispatch<number>;
-  btcAmount: number;
   setBtcAmount: React.Dispatch<number>;
-  busdAmount: number;
   setBusdAmount: React.Dispatch<number>;
   btcPrice: string
 }
 
-export function Form({ busdAmount, setBusdAmount, btcAmount, setBtcAmount, btcPrice, accBalance, setAccBalance }: AccBalance) {
+export function Form({ setBusdAmount, setBtcAmount, btcPrice, accBalance, setAccBalance }: AccBalance) {
   const [input, setInput] = useState("")
-  const [selectedCoin, setSelectedCoin] = useState("BTC")
-  const [coinAmount, setCoinAmount] = useState(0)
+  const [selectedCoinA, setSelectedCoinA] = useState("BRL")
+  const [selectedCoinB, setSelectedCoinB] = useState("BTC")
+  const [convertedCurrency, setConvertedCurrency] = useState(0)
   const [busdPrice, setBusdPrice] = useState("")
 
   useEffect(() => {
@@ -36,9 +34,14 @@ export function Form({ busdAmount, setBusdAmount, btcAmount, setBtcAmount, btcPr
       }
     }
     fetchBUSDPrice()
-    if (selectedCoin === "BTC") { setCoinAmount(parseFloat(input) / parseFloat(btcPrice)) }
-    if (selectedCoin === "BUSD") { setCoinAmount(parseFloat(input) / parseFloat(busdPrice)) }
-  }, [selectedCoin, input])
+    if (selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) / parseFloat(btcPrice)) }
+    if (selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / parseFloat(busdPrice)) }
+    if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) * parseFloat(btcPrice) / parseFloat(btcPrice)) }
+    if (selectedCoinA === selectedCoinB) { setConvertedCurrency(0) }
+  }, [input, selectedCoinA, selectedCoinB])
+
+  // input x cot dolar / btc prce
+  // console.log(parseFloat(coinAmount.toFixed(8)))
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value)
@@ -47,8 +50,9 @@ export function Form({ busdAmount, setBusdAmount, btcAmount, setBtcAmount, btcPr
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
     setAccBalance(accBalance - parseFloat(input))
-    if (selectedCoin === "BTC") { setBtcAmount(coinAmount) }
-    if (selectedCoin === "BUSD") { setBusdAmount(coinAmount) }
+    if (selectedCoinB === "BTC") { setBtcAmount(convertedCurrency) }
+    if (selectedCoinB === "BUSD") { setBusdAmount(convertedCurrency) }
+    if (selectedCoinA === selectedCoinB) { setAccBalance(accBalance) }
   }
 
   return (
@@ -56,17 +60,20 @@ export function Form({ busdAmount, setBusdAmount, btcAmount, setBtcAmount, btcPr
       <div className="flex">
         <div>
           <label className="block" htmlFor="bitcoin">Você comprará:</label>
-          <input value={input} onChange={handleChange} id="bitcoin" className="w-2/4 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
-          <span className="p-3 border">BRL</span>
+          <input value={input} onChange={handleChange} id="bitcoin" className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
+
+          <select value={selectedCoinA} onChange={(e) => setSelectedCoinA(e.target.value)} className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
+            <option value="BRL">BRL</option>
+            <option value="BTC">BTC</option>
+            <option value="BUSD">BUSD</option>
+          </select>
         </div>
         <div>
           <label className="block">Você receberá:</label>
-          <input value={coinAmount} readOnly className="w-2/4 border border-solid border-slate-200 p-2 my-2 mx-0.5 text-lg" type="number" />
+          <input value={convertedCurrency.toFixed(8)} readOnly className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
 
-          <select value={selectedCoin} onChange={(e) => setSelectedCoin(e.target.value)} name="cryptcoin" className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
-            <option value="BTC">
-              BTC
-            </option>
+          <select value={selectedCoinB} onChange={(e) => setSelectedCoinB(e.target.value)} name="cryptcoin" className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
+            <option value="BTC">BTC</option>
             <option value="BUSD">BUSD</option>
           </select>
         </div>

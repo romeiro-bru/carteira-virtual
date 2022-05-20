@@ -14,35 +14,35 @@ type AccBalance = {
   setAccBalance: React.Dispatch<number>;
   setBtcAmount: React.Dispatch<number>;
   setBusdAmount: React.Dispatch<number>;
-  btcPrice: string
+  busdAmount: number;
+  btcAmount: number;
+  btcPrice: number
 }
 
-export function Form({ setBusdAmount, setBtcAmount, btcPrice, accBalance, setAccBalance }: AccBalance) {
+export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPrice, accBalance, setAccBalance }: AccBalance) {
   const [input, setInput] = useState("")
   const [selectedCoinA, setSelectedCoinA] = useState("BRL")
   const [selectedCoinB, setSelectedCoinB] = useState("BTC")
   const [convertedCurrency, setConvertedCurrency] = useState(0)
-  const [busdPrice, setBusdPrice] = useState("")
+  const [busdPrice, setBusdPrice] = useState(0)
 
   useEffect(() => {
     const fetchBUSDPrice = async () => {
       try {
         const response = await axios.get<ApiBUSD>(apiBusd)
-        setBusdPrice(response.data.USD.bid)
+        setBusdPrice(parseFloat(response.data.USD.bid))
       } catch (error) {
         console.log(error)
       }
     }
     fetchBUSDPrice()
-    if (selectedCoinA === "BRL" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) / parseFloat(btcPrice)) }
-    if (selectedCoinA === "BRL" && selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / parseFloat(busdPrice)) }
-    if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) * parseFloat(busdPrice) / parseFloat(btcPrice)) }
-    if (selectedCoinA === "BTC" && selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / parseFloat(busdPrice) * parseFloat(btcPrice)) }
+    if (selectedCoinA === "BRL" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) / btcPrice) }
+    if (selectedCoinA === "BRL" && selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / busdPrice) }
+    if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) * busdPrice / btcPrice) }
+    if (selectedCoinA === "BTC" && selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / busdPrice * btcPrice) }
   }, [input, selectedCoinA, selectedCoinB])
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value)
-  }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -67,7 +67,6 @@ export function Form({ setBusdAmount, setBtcAmount, btcPrice, accBalance, setAcc
         <div>
           <label className="block">Você receberá:</label>
           <input value={convertedCurrency.toFixed(6)} readOnly className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
-
           <select value={selectedCoinB} onChange={(e) => setSelectedCoinB(e.target.value)} name="cryptcoin" className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
             <option value="BTC">BTC</option>
             <option value="BUSD">BUSD</option>

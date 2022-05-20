@@ -58,14 +58,14 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
     <form onSubmit={handleSubmit} className="absolute inset-y-1/4">
       <div className="flex">
         <div>
-          <label className="block" htmlFor="bitcoin">
+          <label className="block" htmlFor="buy-sell">
             <select onChange={(e) => setSelectAction(e.target.value)} className="rounded py-1.5 bg-teal-100" name="buy-sell">
               <option value="buy">Compra</option>
               <option value="sell">Venda</option>
             </select>
           </label>
 
-          <input value={input} onChange={handleChange} id="bitcoin" className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
+          <input value={input} onChange={handleChange} id="buy-sell" className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
 
           <select value={selectedCoinA} onChange={(e) => setSelectedCoinA(e.target.value)} className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
             <option value="BRL">BRL</option>
@@ -74,8 +74,8 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
           </select>
         </div>
         <div>
-          <label className="block py-1">Você receberá:</label>
-          <input value={convertedCurrency.toFixed(6)} readOnly className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
+          <label className="block py-1" htmlFor="receive">Você receberá:</label>
+          <input value={convertedCurrency.toFixed(6)} readOnly id="receive" className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
           <select value={selectedCoinB} onChange={(e) => setSelectedCoinB(e.target.value)} name="cryptcoin" className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
             <option value="BTC">BTC</option>
             <option value="BUSD">BUSD</option>

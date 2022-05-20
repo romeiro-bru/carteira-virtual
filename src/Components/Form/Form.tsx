@@ -52,6 +52,8 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
     if (selectedCoinB === "BUSD") { setBusdAmount(convertedCurrency) }
   }
 
+  const disableButton = () => input.length === 0 || selectedCoinA === selectedCoinB || selectedCoinA === "BRL"
+
   return (
     <form onSubmit={handleSubmit} className="absolute inset-y-1/4">
       <div className="flex">
@@ -80,7 +82,7 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
           </select>
         </div>
       </div>
-      <button disabled={input.length === 0 || selectedCoinA === selectedCoinB} className="disabled:opacity-60 absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">
+      <button disabled={disableButton()} className="disabled:opacity-60 absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">
         {selectAction === "buy" ? "Comprar" : "Vender"}
       </button>
     </form>

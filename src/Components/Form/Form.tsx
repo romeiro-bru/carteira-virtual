@@ -25,7 +25,6 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
   const [selectedCoinB, setSelectedCoinB] = useState("BTC")
   const [convertedCurrency, setConvertedCurrency] = useState(0)
   const [busdPrice, setBusdPrice] = useState(0)
-  const [selectAction, setSelectAction] = useState("buy")
 
   useEffect(() => {
     const fetchBUSDPrice = async () => {
@@ -40,29 +39,30 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
     if (selectedCoinA === "BRL" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) / btcPrice) }
     if (selectedCoinA === "BRL" && selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / busdPrice) }
     if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) * busdPrice / btcPrice) }
-    if (selectedCoinA === "BTC" && selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / busdPrice * btcPrice) }
+    if (selectedCoinA === "BTC" && selectedCoinB === "BUSD" && parseFloat(input)) { setConvertedCurrency(parseFloat(input) / busdPrice * btcPrice) }
   }, [input, selectedCoinA, selectedCoinB])
+
+  console.log(parseFloat(input) <= busdAmount)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setAccBalance(accBalance - parseFloat(input))
-    if (selectedCoinB === "BTC") { setBtcAmount(convertedCurrency) }
-    if (selectedCoinB === "BUSD") { setBusdAmount(convertedCurrency) }
+    selectedCoinA === "BRL" && setAccBalance(accBalance - parseFloat(input))
+    if (selectedCoinB === "BTC" && selectedCoinA === "BRL") { setBtcAmount(convertedCurrency) }
+    if (selectedCoinB === "BUSD" && selectedCoinA == "BRL") { setBusdAmount(convertedCurrency) }
+
+    if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") { setBusdAmount(busdAmount - parseFloat(input)) }
   }
 
-  const disableButton = () => input.length === 0 || selectedCoinA === selectedCoinB || selectedCoinA === "BRL" && selectAction === "sell"
+  const disableButton = () => input.length === 0 || selectedCoinA === selectedCoinB || parseFloat(input) >= busdAmount && selectedCoinA === "BUSD"
 
   return (
     <form onSubmit={handleSubmit} className="absolute inset-y-1/4">
       <div className="flex">
         <div>
           <label className="block" htmlFor="buy-sell">
-            <select onChange={(e) => setSelectAction(e.target.value)} className="rounded py-1.5 bg-teal-100" name="buy-sell">
-              <option value="buy">Compra</option>
-              <option value="sell">Venda</option>
-            </select>
+            Você comprará:
           </label>
 
           <input value={input} onChange={handleChange} id="buy-sell" className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
@@ -83,7 +83,7 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
         </div>
       </div>
       <button disabled={disableButton()} className="disabled:opacity-60 absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">
-        {selectAction === "buy" ? "Comprar" : "Vender"}
+        Comprar
       </button>
     </form>
   );

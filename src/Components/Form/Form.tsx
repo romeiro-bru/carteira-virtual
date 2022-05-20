@@ -52,7 +52,7 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
     if (selectedCoinB === "BUSD") { setBusdAmount(convertedCurrency) }
   }
 
-  const disableButton = () => input.length === 0 || selectedCoinA === selectedCoinB || selectedCoinA === "BRL"
+  const disableButton = () => input.length === 0 || selectedCoinA === selectedCoinB || selectedCoinA === "BRL" && selectAction === "sell"
 
   return (
     <form onSubmit={handleSubmit} className="absolute inset-y-1/4">

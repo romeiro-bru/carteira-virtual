@@ -42,20 +42,21 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
     if (selectedCoinA === "BTC" && selectedCoinB === "BUSD" && parseFloat(input)) { setConvertedCurrency(parseFloat(input) / busdPrice * btcPrice) }
   }, [input, selectedCoinA, selectedCoinB])
 
-  console.log(parseFloat(input) <= busdAmount)
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
     selectedCoinA === "BRL" && setAccBalance(accBalance - parseFloat(input))
-    if (selectedCoinB === "BTC" && selectedCoinA === "BRL") { setBtcAmount(convertedCurrency) }
-    if (selectedCoinB === "BUSD" && selectedCoinA == "BRL") { setBusdAmount(convertedCurrency) }
+    selectedCoinB === "BTC" && selectedCoinA === "BRL" && setBtcAmount(convertedCurrency)
+    selectedCoinB === "BUSD" && selectedCoinA == "BRL" && setBusdAmount(convertedCurrency)
 
-    if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") { setBusdAmount(busdAmount - parseFloat(input)) }
+    if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") {
+      setBusdAmount(busdAmount - parseFloat(input))
+      setBtcAmount(convertedCurrency)
+    }
   }
 
-  const disableButton = () => input.length === 0 || selectedCoinA === selectedCoinB || parseFloat(input) >= busdAmount && selectedCoinA === "BUSD"
+  const disableButton = () => input.length === 0 || selectedCoinA === selectedCoinB || parseFloat(input) > busdAmount && selectedCoinA === "BUSD"
 
   return (
     <form onSubmit={handleSubmit} className="absolute inset-y-1/4">

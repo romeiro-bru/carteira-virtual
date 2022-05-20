@@ -46,14 +46,17 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
-    selectedCoinA === "BRL" && setAccBalance(accBalance - parseFloat(input))
+    if (selectedCoinA === "BRL") {
+      setAccBalance(accBalance - parseFloat(input))
+    }
     selectedCoinB === "BTC" && selectedCoinA === "BRL" && setBtcAmount(convertedCurrency)
     selectedCoinB === "BUSD" && selectedCoinA == "BRL" && setBusdAmount(convertedCurrency)
 
     if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") {
       setBusdAmount(busdAmount - parseFloat(input))
       setBtcAmount(convertedCurrency)
-    } else {
+    }
+    if (selectedCoinA === "BTC" && selectedCoinB === "BUSD") {
       setBtcAmount(btcAmount - parseFloat(input))
       setBusdAmount(convertedCurrency)
     }

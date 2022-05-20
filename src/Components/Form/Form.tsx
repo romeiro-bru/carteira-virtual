@@ -25,6 +25,7 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
   const [selectedCoinB, setSelectedCoinB] = useState("BTC")
   const [convertedCurrency, setConvertedCurrency] = useState(0)
   const [busdPrice, setBusdPrice] = useState(0)
+  const [selectAction, setSelectAction] = useState("buy")
 
   useEffect(() => {
     const fetchBUSDPrice = async () => {
@@ -55,7 +56,13 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
     <form onSubmit={handleSubmit} className="absolute inset-y-1/4">
       <div className="flex">
         <div>
-          <label className="block" htmlFor="bitcoin">Você comprará:</label>
+          <label className="block" htmlFor="bitcoin">
+            <select onChange={(e) => setSelectAction(e.target.value)} className="rounded py-1.5 bg-teal-100" name="buy-sell">
+              <option value="buy">Compra</option>
+              <option value="sell">Venda</option>
+            </select>
+          </label>
+
           <input value={input} onChange={handleChange} id="bitcoin" className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
 
           <select value={selectedCoinA} onChange={(e) => setSelectedCoinA(e.target.value)} className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
@@ -65,7 +72,7 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
           </select>
         </div>
         <div>
-          <label className="block">Você receberá:</label>
+          <label className="block py-1">Você receberá:</label>
           <input value={convertedCurrency.toFixed(6)} readOnly className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
           <select value={selectedCoinB} onChange={(e) => setSelectedCoinB(e.target.value)} name="cryptcoin" className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
             <option value="BTC">BTC</option>
@@ -73,7 +80,9 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
           </select>
         </div>
       </div>
-      <button disabled={selectedCoinA === selectedCoinB} className="disabled:opacity-60 absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">Comprar</button>
+      <button disabled={input.length === 0 || selectedCoinA === selectedCoinB} className="disabled:opacity-60 absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">
+        {selectAction === "buy" ? "Comprar" : "Vender"}
+      </button>
     </form>
   );
 }

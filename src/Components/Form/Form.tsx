@@ -53,10 +53,16 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
     if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") {
       setBusdAmount(busdAmount - parseFloat(input))
       setBtcAmount(convertedCurrency)
+    } else {
+      setBtcAmount(btcAmount - parseFloat(input))
+      setBusdAmount(convertedCurrency)
     }
   }
 
-  const disableButton = () => input.length === 0 || selectedCoinA === selectedCoinB || parseFloat(input) > busdAmount && selectedCoinA === "BUSD"
+  const disableButton = input.length === 0 ||
+    selectedCoinA === selectedCoinB ||
+    parseFloat(input) > busdAmount && selectedCoinA === "BUSD" ||
+    parseFloat(input) > btcAmount && selectedCoinA === "BTC"
 
   return (
     <form onSubmit={handleSubmit} className="absolute inset-y-1/4">
@@ -83,7 +89,7 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
           </select>
         </div>
       </div>
-      <button disabled={disableButton()} className="disabled:opacity-60 absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">
+      <button disabled={disableButton} className="disabled:opacity-60 absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">
         Comprar
       </button>
     </form>

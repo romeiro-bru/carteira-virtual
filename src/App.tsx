@@ -13,6 +13,8 @@ type ApiBtc = {
   }
 };
 
+const transformCurrency = (btcPrice: number) => btcPrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+
 function App() {
   const [accBalance, setAccBalance] = useState(100000)
   const [btcPrice, setBtcPrice] = useState(0)
@@ -31,7 +33,6 @@ function App() {
     fetchBtcPrice()
   }, [])
 
-  const transformCurrency = btcPrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
 
   return (
     <div className="App">
@@ -45,7 +46,7 @@ function App() {
               <li className="flex justify-between py-3 px-5">BTC:  <div>฿ {btcAmount.toFixed(6)}</div></li>
 
               <li className="flex justify-between pt-3 pb-8 px-5">BUSD: <div>$ {busdAmount.toFixed(3)}</div></li>
-              <li className="flex justify-between text-xs text-slate-500 py-5 px-2 border-t-2">Preço BTC: <div>{transformCurrency}</div></li>
+              <li className="flex justify-between text-xs text-slate-500 py-5 px-2 border-t-2">Preço BTC: <div>{transformCurrency(btcPrice)}</div></li>
             </ul>
           </aside>
           <Nav />

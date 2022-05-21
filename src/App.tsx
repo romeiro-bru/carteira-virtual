@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Form } from './Components/Form/Form';
+import { Form } from './Components/Form';
 import { Nav } from './Components/Nav';
 import { Header } from './Components/Header';
 // const bitcoin = require('./assets/icons/bitcoin.png');

@@ -36,6 +36,9 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
       }
     }
     fetchBUSDPrice()
+  }, [])
+
+  useEffect(() => {
     if (selectedCoinA === "BRL" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) / btcPrice) }
     if (selectedCoinA === "BRL" && selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / busdPrice) }
     if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) * busdPrice / btcPrice) }
@@ -62,7 +65,7 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
     }
   }
 
-  const disableButton = input.length === 0 ||
+  const isButtonDisabled = input.length === 0 ||
     selectedCoinA === selectedCoinB ||
     parseFloat(input) > busdAmount && selectedCoinA === "BUSD" ||
     parseFloat(input) > btcAmount && selectedCoinA === "BTC"
@@ -92,7 +95,7 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
           </select>
         </div>
       </div>
-      <button disabled={disableButton} className="disabled:opacity-60 absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">
+      <button disabled={isButtonDisabled} className="disabled:opacity-60 absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">
         Comprar
       </button>
     </form>

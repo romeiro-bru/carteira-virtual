@@ -1,8 +1,15 @@
 import { Nav } from './Nav';
 
-const transformCurrency = (btcPrice) => btcPrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+type AccBalance = {
+  accBalance: number;
+  busdAmount: number;
+  btcAmount: number;
+  btcPrice: number
+}
 
-export function SideBar({ accBalance, btcAmount, busdAmount, btcPrice }) {
+const transformCurrency = (btcPrice: number) => btcPrice.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+
+export function SideBar({ accBalance, btcAmount, busdAmount, btcPrice }: AccBalance) {
   return (
     <section>
       <aside className="bg-white rounded-md shadow-md text-left text-slate-700">

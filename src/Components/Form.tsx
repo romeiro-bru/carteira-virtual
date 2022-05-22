@@ -89,7 +89,7 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
             </select>
           </div>
           <div>
-            <label className="block py-1" htmlFor="receive">Você receberá:</label>
+            <label className="block" htmlFor="receive">Você receberá:</label>
             <input value={convertedCurrency.toFixed(6)} readOnly id="receive" className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
             <select value={selectedCoinB} onChange={(e) => setSelectedCoinB(e.target.value)} name="cryptcoin" className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
               <option value="BTC">BTC</option>

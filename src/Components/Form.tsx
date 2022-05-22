@@ -53,7 +53,7 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
       setAccBalance(accBalance - parseFloat(input))
     }
     selectedCoinB === "BTC" && selectedCoinA === "BRL" && setBtcAmount(convertedCurrency)
-    selectedCoinB === "BUSD" && selectedCoinA == "BRL" && setBusdAmount(convertedCurrency)
+    selectedCoinB === "BUSD" && selectedCoinA === "BRL" && setBusdAmount(convertedCurrency)
 
     if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") {
       setBusdAmount(busdAmount - parseFloat(input))
@@ -65,10 +65,10 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
     }
   }
 
-  const isButtonDisabled = input.length === 0 ||
-    selectedCoinA === selectedCoinB ||
-    parseFloat(input) > busdAmount && selectedCoinA === "BUSD" ||
-    parseFloat(input) > btcAmount && selectedCoinA === "BTC"
+  const isButtonDisabled = (input.length === 0) ||
+    (selectedCoinA === selectedCoinB) ||
+    (parseFloat(input) > busdAmount && selectedCoinA === "BUSD") ||
+    (parseFloat(input) > btcAmount && selectedCoinA === "BTC")
 
   return (
     <main className="relative w-2/4 py-4 px-8 bg-white rounded-md shadow-md text-slate-700 text-left">

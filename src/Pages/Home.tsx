@@ -42,7 +42,7 @@ export function Home() {
     // const ls = localStorage.getItem("storeAccData")
     // ls !== null && setData(JSON.parse(ls))
     setWallet([...wallet, { balance: accBalance, btc: btcAmount, busd: busdAmount, id: Date.now() }])
-  }, [accBalance, btcAmount, busdAmount, wallet])
+  }, [accBalance, btcAmount, busdAmount])
 
   useEffect(() => {
     localStorage.setItem("storeAccData", JSON.stringify(wallet))

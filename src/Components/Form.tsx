@@ -17,18 +17,17 @@ type AccBalance = {
   busdAmount: number;
   btcAmount: number;
   btcPrice: number;
-  data: Array<{ id: number, btc: number, busd: number, balance: number }>;
-  setData: React.Dispatch<Array<{ id: number, btc: number, busd: number, balance: number }>>
+  wallet: Array<{ id: number, btc: number, busd: number, balance: number }>;
+  setWallet: React.Dispatch<Array<{ id: number, btc: number, busd: number, balance: number }>>
 }
 
-export function Form({ setData, data, busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPrice, accBalance, setAccBalance }: AccBalance) {
+export function Form({ wallet, busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPrice, accBalance, setAccBalance }: AccBalance) {
   const [input, setInput] = useState("")
   const [selectedCoinA, setSelectedCoinA] = useState("BRL")
   const [selectedCoinB, setSelectedCoinB] = useState("BTC")
   const [convertedCurrency, setConvertedCurrency] = useState(0)
   const [busdPrice, setBusdPrice] = useState(0)
-
-  const lastIndex = data.length - 1
+  const lastIndex = wallet.length - 1
 
   useEffect(() => {
     const fetchBUSDPrice = async () => {
@@ -50,29 +49,27 @@ export function Form({ setData, data, busdAmount, btcAmount, setBusdAmount, setB
   }, [input, selectedCoinA, selectedCoinB])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)
-
-  console.log(data[lastIndex].busd)
-
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (selectedCoinA === "BRL") {
       setAccBalance(accBalance - parseFloat(input))
+      selectedCoinB === "BTC" && setBtcAmount(convertedCurrency + wallet[lastIndex].btc)
+      return selectedCoinB === "BUSD" && setBusdAmount(convertedCurrency + wallet[lastIndex].busd)
     }
-    selectedCoinB === "BTC" && selectedCoinA === "BRL" && setBtcAmount(convertedCurrency)
-    selectedCoinB === "BUSD" && selectedCoinA === "BRL" && setBusdAmount(convertedCurrency)
 
     if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") {
       setBusdAmount(busdAmount - parseFloat(input))
-      setBtcAmount(convertedCurrency)
+      return setBtcAmount(convertedCurrency + wallet[lastIndex].btc)
     }
     if (selectedCoinA === "BTC" && selectedCoinB === "BUSD") {
       setBtcAmount(btcAmount - parseFloat(input))
-      setBusdAmount(convertedCurrency)
+      return setBusdAmount(convertedCurrency + wallet[lastIndex].busd)
     }
   }
 
   const isButtonDisabled = (input.length === 0) ||
     (selectedCoinA === selectedCoinB) ||
+    (parseFloat(input) > accBalance && selectedCoinA === "BRL") ||
     (parseFloat(input) > busdAmount && selectedCoinA === "BUSD") ||
     (parseFloat(input) > btcAmount && selectedCoinA === "BTC")
 

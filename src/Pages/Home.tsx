@@ -12,19 +12,23 @@ type ApiBtc = {
   }
 };
 
-type Data = {
+export type Data = {
   btc: number;
   busd: number;
   balance: number;
   id: number;
 }
 
+const initVal: Data = {
+  balance: 100000,
+  btc: 0,
+  busd: 0,
+  id: 0
+}
+
 export function Home() {
-  const [wallet, setWallet] = useState<Data[]>([])
-  const [accBalance, setAccBalance] = useState(100000)
+  const [wallet, setWallet] = useState<Data[]>([initVal])
   const [btcPrice, setBtcPrice] = useState(0)
-  const [btcAmount, setBtcAmount] = useState(0)
-  const [busdAmount, setBusdAmount] = useState(0)
 
   useEffect(() => {
     const fetchBtcPrice = async () => {
@@ -39,19 +43,13 @@ export function Home() {
   }, [])
 
   useEffect(() => {
-    // const ls = localStorage.getItem("storeAccData")
-    // ls !== null && setData(JSON.parse(ls))
-    setWallet([...wallet, { balance: accBalance, btc: btcAmount, busd: busdAmount, id: Date.now() }])
-  }, [accBalance, btcAmount, busdAmount])
-
-  useEffect(() => {
     localStorage.setItem("storeAccData", JSON.stringify(wallet))
   }, [wallet])
 
   return (
     <div className="flex flex-wrap justify-evenly mt-8">
-      <SideBar accBalance={accBalance} btcAmount={btcAmount} busdAmount={busdAmount} btcPrice={btcPrice} />
-      <Form setWallet={setWallet} wallet={wallet} busdAmount={busdAmount} btcAmount={btcAmount} setBusdAmount={setBusdAmount} setBtcAmount={setBtcAmount} btcPrice={btcPrice} setAccBalance={setAccBalance} accBalance={accBalance} />
+      <SideBar wallet={wallet} btcPrice={btcPrice} />
+      <Form setWallet={setWallet} wallet={wallet} btcPrice={btcPrice} />
       {/* <Transactions wallet={wallet} /> */}
     </div>
   );

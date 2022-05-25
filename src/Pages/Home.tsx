@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import { Form } from '../Components/Form';
 import { SideBar } from '../Components/SideBar';
-import { Transactions } from '../Components/Transactions';
+// import { Transactions } from '../Components/Transactions';
 
 const apiBtc = "https://www.mercadobitcoin.net/api/BTC/ticker";
 

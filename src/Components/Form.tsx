@@ -21,7 +21,7 @@ type AccBalance = {
   setWallet: React.Dispatch<Array<{ id: number, btc: number, busd: number, balance: number }>>
 }
 
-export function Form({ wallet, busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPrice, accBalance, setAccBalance }: AccBalance) {
+export function Form({ setWallet, wallet, busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPrice, accBalance, setAccBalance }: AccBalance) {
   const [input, setInput] = useState("")
   const [selectedCoinA, setSelectedCoinA] = useState("BRL")
   const [selectedCoinB, setSelectedCoinB] = useState("BTC")
@@ -46,17 +46,15 @@ export function Form({ wallet, busdAmount, btcAmount, setBusdAmount, setBtcAmoun
     if (selectedCoinA === "BRL" && selectedCoinB === "BUSD") { setConvertedCurrency(parseFloat(input) / busdPrice) }
     if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) * busdPrice / btcPrice) }
     if (selectedCoinA === "BTC" && selectedCoinB === "BUSD" && parseFloat(input)) { setConvertedCurrency(parseFloat(input) / busdPrice * btcPrice) }
-  }, [input, selectedCoinA, selectedCoinB])
+  }, [input, selectedCoinA, selectedCoinB, busdPrice, btcPrice])
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (selectedCoinA === "BRL") {
       setAccBalance(accBalance - parseFloat(input))
-      selectedCoinB === "BTC" && setBtcAmount(convertedCurrency + wallet[lastIndex].btc)
-      return selectedCoinB === "BUSD" && setBusdAmount(convertedCurrency + wallet[lastIndex].busd)
+      if (selectedCoinB === "BTC") { setBtcAmount(convertedCurrency + wallet[lastIndex].btc) }
+      if (selectedCoinB === "BUSD") { setBusdAmount(convertedCurrency + wallet[lastIndex].busd) }
     }
-
     if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") {
       setBusdAmount(busdAmount - parseFloat(input))
       return setBtcAmount(convertedCurrency + wallet[lastIndex].btc)
@@ -83,7 +81,7 @@ export function Form({ wallet, busdAmount, btcAmount, setBusdAmount, setBtcAmoun
               Você comprará:
             </label>
 
-            <input value={input} onChange={handleChange} id="buy-sell" className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
+            <input value={input} onChange={(e) => setInput(e.target.value)} id="buy-sell" className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
 
             <select value={selectedCoinA} onChange={(e) => setSelectedCoinA(e.target.value)} className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
               <option value="BRL">BRL</option>

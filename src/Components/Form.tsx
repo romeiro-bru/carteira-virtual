@@ -16,15 +16,19 @@ type AccBalance = {
   setBusdAmount: React.Dispatch<number>;
   busdAmount: number;
   btcAmount: number;
-  btcPrice: number
+  btcPrice: number;
+  data: Array<{ id: number, btc: number, busd: number, balance: number }>;
+  setData: React.Dispatch<Array<{ id: number, btc: number, busd: number, balance: number }>>
 }
 
-export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPrice, accBalance, setAccBalance }: AccBalance) {
+export function Form({ setData, data, busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPrice, accBalance, setAccBalance }: AccBalance) {
   const [input, setInput] = useState("")
   const [selectedCoinA, setSelectedCoinA] = useState("BRL")
   const [selectedCoinB, setSelectedCoinB] = useState("BTC")
   const [convertedCurrency, setConvertedCurrency] = useState(0)
   const [busdPrice, setBusdPrice] = useState(0)
+
+  const lastIndex = data.length - 1
 
   useEffect(() => {
     const fetchBUSDPrice = async () => {
@@ -46,6 +50,8 @@ export function Form({ busdAmount, btcAmount, setBusdAmount, setBtcAmount, btcPr
   }, [input, selectedCoinA, selectedCoinB])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)
+
+  console.log(data[lastIndex].busd)
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()

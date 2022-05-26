@@ -27,7 +27,7 @@ const initVal: Data = {
 }
 
 const ls = localStorage.getItem("storeAccData")
-const initData = ls ? JSON.parse(ls) : initVal
+const initData = ls !== null && ls !== undefined ? JSON.parse(ls) : [initVal]
 
 export function Home() {
   const [wallet, setWallet] = useState<Data[]>(initData)

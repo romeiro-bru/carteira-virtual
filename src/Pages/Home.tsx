@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form } from '../Components/Form';
 import { SideBar } from '../Components/SideBar';
-// import { Transactions } from '../Components/Transactions';
+import { Transactions } from '../Components/Transactions';
 
 const apiBtc = "https://www.mercadobitcoin.net/api/BTC/ticker";
 
@@ -26,14 +26,12 @@ const initVal: Data = {
   id: 0
 }
 
-export function Home() {
-  const [wallet, setWallet] = useState<Data[]>([initVal])
-  const [btcPrice, setBtcPrice] = useState(0)
-  const ls = localStorage.getItem("storeAccData")
+const ls = localStorage.getItem("storeAccData")
+const initData = ls ? JSON.parse(ls) : initVal
 
-  useEffect(() => {
-    ls !== null ? setWallet(JSON.parse(ls)) : setWallet([initVal])
-  }, []);
+export function Home() {
+  const [wallet, setWallet] = useState<Data[]>(initData)
+  const [btcPrice, setBtcPrice] = useState(0)
 
   useEffect(() => {
     const fetchBtcPrice = async () => {

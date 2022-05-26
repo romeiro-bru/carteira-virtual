@@ -29,6 +29,11 @@ const initVal: Data = {
 export function Home() {
   const [wallet, setWallet] = useState<Data[]>([initVal])
   const [btcPrice, setBtcPrice] = useState(0)
+  const ls = localStorage.getItem("storeAccData")
+
+  useEffect(() => {
+    ls !== null ? setWallet(JSON.parse(ls)) : setWallet([initVal])
+  }, []);
 
   useEffect(() => {
     const fetchBtcPrice = async () => {

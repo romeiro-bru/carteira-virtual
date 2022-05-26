@@ -23,6 +23,7 @@ export function Form({ setWallet, wallet, btcPrice }: AccBalance) {
   const [busdPrice, setBusdPrice] = useState(0)
 
   const lastValue = wallet[wallet.length - 1]
+  const ls = localStorage.getItem("storeAccData")
 
   useEffect(() => {
     const fetchBUSDPrice = async () => {
@@ -42,6 +43,10 @@ export function Form({ setWallet, wallet, btcPrice }: AccBalance) {
     if (selectedCoinA === "BUSD" && selectedCoinB === "BTC") { setConvertedCurrency(parseFloat(input) * busdPrice / btcPrice) }
     if (selectedCoinA === "BTC" && selectedCoinB === "BUSD" && parseFloat(input)) { setConvertedCurrency(parseFloat(input) / busdPrice * btcPrice) }
   }, [input, selectedCoinA, selectedCoinB, busdPrice, btcPrice])
+
+  useEffect(() => {
+    ls !== null && setWallet(JSON.parse(ls))
+  }, []);
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()

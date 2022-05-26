@@ -9,7 +9,7 @@
 
 > O objetivo é construir uma aplicação onde o usuário poderá negociar criptomoedas.
 
-<img height="340" src="https://user-images.githubusercontent.com/56081906/169403943-037c6184-bc83-41a2-b1af-c86ad43156cd.gif" />
+<img height="340" src="https://user-images.githubusercontent.com/56081906/170386534-766dbd67-f5f7-45ab-8ab8-0624aa76b002.gif" />
 
 ## Objetivos
 - Realizar cadastro

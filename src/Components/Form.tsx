@@ -77,7 +77,7 @@ export function Form({ setWallet, wallet, btcPrice }: AccBalance) {
 
             <input value={input} onChange={(e) => setInput(e.target.value)} id="buy-sell" className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
 
-            <select value={selectedCoinA} onChange={(e) => setSelectedCoinA(e.target.value)} className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
+            <select value={selectedCoinA} onChange={(e) => setSelectedCoinA(e.target.value)} className="py-4 px-1 bg-primary-color rounded cursor-pointer">
               <option value="BRL">BRL</option>
               <option value="BTC">BTC</option>
               <option value="BUSD">BUSD</option>
@@ -86,7 +86,7 @@ export function Form({ setWallet, wallet, btcPrice }: AccBalance) {
           <div>
             <label className="block" htmlFor="receive">Você receberá:</label>
             <input value={convertedCurrency.toFixed(6)} readOnly id="receive" className="w-2/4 border border-solid border-slate-200 p-2 my-2 text-lg" type="number" />
-            <select value={selectedCoinB} onChange={(e) => setSelectedCoinB(e.target.value)} name="cryptcoin" className="py-3.5 px-1 bg-primary-color rounded cursor-pointer">
+            <select value={selectedCoinB} onChange={(e) => setSelectedCoinB(e.target.value)} name="cryptcoin" className="py-4 px-1 bg-primary-color rounded cursor-pointer">
               <option value="BTC">BTC</option>
               <option value="BUSD">BUSD</option>
             </select>

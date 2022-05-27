@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form } from '../Components/Form';
 import { SideBar } from '../Components/SideBar';
-// import { Transactions } from '../Components/Transactions';
+import { Transactions } from '../Components/Transactions';
 
 const apiBtc = "https://www.mercadobitcoin.net/api/BTC/ticker";
 
@@ -52,8 +52,10 @@ export function Home() {
   return (
     <div className="flex flex-wrap justify-evenly mt-8">
       <SideBar wallet={wallet} btcPrice={btcPrice} />
-      <Form setWallet={setWallet} wallet={wallet} btcPrice={btcPrice} />
-      {/* <Transactions wallet={wallet} /> */}
+      <main className="relative w-2/4 py-4 px-8 bg-white rounded-md shadow-md text-slate-700 text-left">
+        <Form setWallet={setWallet} wallet={wallet} btcPrice={btcPrice} />
+        {wallet[1] && <Transactions wallet={wallet} />}
+      </main>
     </div>
   );
 }

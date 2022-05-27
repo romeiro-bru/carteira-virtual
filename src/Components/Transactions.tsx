@@ -14,8 +14,8 @@ const column = [
 
 export function Transactions({ wallet }: AccBalance) {
   return (
-    <main className="relative w-2/4 py-4 px-8 bg-white rounded-md shadow-md text-slate-700 text-left">
-      <h1 className="mb-9 text-xl font-medium">Transações</h1>
+    <section className="mt-6">
+      <h2 className="mb-9 text-xl font-medium">Transações</h2>
       <table className="w-full">
         <thead>
           <tr className="flex justify-between flex-wrap p-2 border-t-2 border-slate-300 even:bg-slate-200">
@@ -37,6 +37,6 @@ export function Transactions({ wallet }: AccBalance) {
           )}
         </tbody>
       </table>
-    </main>
+    </section>
   );
 }

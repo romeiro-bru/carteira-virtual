@@ -6,7 +6,7 @@ type AccBalance = {
   wallet: Array<{ id: number, btc: number, busd: number, balance: number }>;
 }
 
-const column = [
+const head = [
   { head: "BTC", img: bitcoin },
   { head: "BUSD", img: busd },
   { head: "Id", img: date }
@@ -18,8 +18,8 @@ export function Transactions({ wallet }: AccBalance) {
       <h2 className="mb-9 text-xl font-medium">Transações</h2>
       <table className="w-full">
         <thead>
-          <tr className="flex justify-between flex-wrap p-2 border-t-2 border-slate-300 even:bg-slate-200">
-            {column.map((item, i) =>
+          <tr className="flex justify-between flex-wrap py-2 pr-12 border-t-2 border-slate-300 even:bg-slate-200">
+            {head.map((item, i) =>
               <th key={i} className="flex">
                 <img src={item.img} className="h-7 mr-0.5" alt={`${item.head} icon`} />
                 {item.head}

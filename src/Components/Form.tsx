@@ -66,9 +66,9 @@ export function Form({ setWallet, wallet, btcPrice }: AccBalance) {
     (parseFloat(input) > lastValue.btc && selectedCoinA === "BTC")
 
   return (
-    <main className="relative w-2/4 py-4 px-8 bg-white rounded-md shadow-md text-slate-700 text-left">
+    <section className="relative pb-28">
       <h1 className="mb-9 text-xl font-medium">Compra e Venda de Criptomoedas</h1>
-      <form onSubmit={handleSubmit} className="absolute inset-y-1/4">
+      <form onSubmit={handleSubmit} className="inset-y-1/4">
         <div className="flex">
           <div>
             <label className="block" htmlFor="buy-sell">
@@ -92,10 +92,10 @@ export function Form({ setWallet, wallet, btcPrice }: AccBalance) {
             </select>
           </div>
         </div>
-        <button disabled={isButtonDisabled} className="disabled:opacity-60 absolute top-3/4 left-0 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">
+        <button disabled={isButtonDisabled} className="disabled:opacity-60 absolute top-3/4 left-1 py-4 px-8 rounded-full bg-primary-color hover:bg-secondary-color duration-100 text-slate-800 font-bold">
           Comprar
         </button>
       </form>
-    </main>
+    </section>
   );
 }

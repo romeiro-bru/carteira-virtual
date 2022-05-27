@@ -12,7 +12,7 @@ export function SideBar({ wallet, btcPrice }: AccBalance) {
   const lastIndex = wallet.length - 1
 
   return (
-    <section>
+    <section className="w-56">
       <aside className="bg-white rounded-md shadow-md text-left text-slate-700">
         <h2 className="font-medium text-lg pt-4 pl-4">Saldo</h2>
         <ul className="list-none p-0">

@@ -18,7 +18,7 @@ export function Transactions({ wallet }: AccBalance) {
       <h2 className="mb-9 text-xl font-medium">Transações</h2>
       <table className="w-full">
         <thead>
-          <tr className="flex justify-between flex-wrap p-2 border-t-2 border-slate-300 even:bg-slate-200">
+          <tr className="flex justify-between flex-wrap py-2 pr-12 border-t-2 border-slate-300 even:bg-slate-200">
             {column.map((item, i) =>
               <th key={i} className="flex">
                 <img src={item.img} className="h-7 mr-0.5" alt={`${item.head} icon`} />

@@ -7,9 +7,13 @@
   <img  src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"  height="25" alt="typescript">
 </p>
 
-> O objetivo é construir uma aplicação onde o usuário poderá negociar criptomoedas.
+> O objetivo foi construir uma aplicação onde o usuário poderá negociar criptomoedas.
+
+> [Deploy do projeto](https://carteira-virtual-romeirob.netlify.app/)
 
 <img height="340" src="https://user-images.githubusercontent.com/56081906/170386534-766dbd67-f5f7-45ab-8ab8-0624aa76b002.gif" />
+
+> Anotações feitas no [Notion](https://olive-fig-d67.notion.site/Carteira-Virtual-Bruna-R-f9f4a97b930649d3b41e9f7270db374e) durante a construção do desafio. 
 
 ## Objetivos
 - Realizar cadastro

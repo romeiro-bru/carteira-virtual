@@ -11,7 +11,7 @@
 > O objetivo foi construir uma aplicação onde o usuário poderá negociar criptomoedas.
 
 * [Carteira Virtual](https://carteira-virtual-romeirob.netlify.app/) no Netlify 
-* Anotações feitas no [Notion](https://olive-fig-d67.notion.site/Carteira-Virtual-Bruna-R-f9f4a97b930649d3b41e9f7270db374e) durante a construção do desafio. 
+* Anotações feitas no [Notion](https://olive-fig-d67.notion.site/Carteira-Virtual-Bruna-R-f9f4a97b930649d3b41e9f7270db374e) durante a construção do projeto. 
 
 <img height="320" src="https://user-images.githubusercontent.com/56081906/171480599-3158c3d7-7419-4804-83e4-21b355c02d58.gif" />
 

@@ -5,15 +5,15 @@
   <img  src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"  height="25" alt="tailwind">
   <img  src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"  height="25" alt="react" />
   <img  src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"  height="25" alt="typescript">
+  <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" height="25" alt="netlify" />
 </p>
 
 > O objetivo foi construir uma aplicação onde o usuário poderá negociar criptomoedas.
 
-> [Carteira Virtual](https://carteira-virtual-romeirob.netlify.app/) no Netlify 
+* [Carteira Virtual](https://carteira-virtual-romeirob.netlify.app/) no Netlify 
+* Anotações feitas no [Notion](https://olive-fig-d67.notion.site/Carteira-Virtual-Bruna-R-f9f4a97b930649d3b41e9f7270db374e) durante a construção do desafio. 
 
 <img height="320" src="https://user-images.githubusercontent.com/56081906/171480599-3158c3d7-7419-4804-83e4-21b355c02d58.gif" />
-
-> Anotações feitas no [Notion](https://olive-fig-d67.notion.site/Carteira-Virtual-Bruna-R-f9f4a97b930649d3b41e9f7270db374e) durante a construção do desafio. 
 
 ## Objetivos
 - Realizar cadastro

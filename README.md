@@ -9,7 +9,7 @@
 
 > O objetivo foi construir uma aplicação onde o usuário poderá negociar criptomoedas.
 
-> [Deploy do projeto](https://carteira-virtual-romeirob.netlify.app/)
+> [Carteira Virtual](https://carteira-virtual-romeirob.netlify.app/) no Netlify 
 
 <img height="340" src="https://user-images.githubusercontent.com/56081906/170386534-766dbd67-f5f7-45ab-8ab8-0624aa76b002.gif" />
 

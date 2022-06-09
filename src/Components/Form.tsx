@@ -61,6 +61,7 @@ export function Form({ setWallet, wallet, btcPrice }: AccBalance) {
 
   const isButtonDisabled = (input.length === 0) ||
     (selectedCoinA === selectedCoinB) ||
+    (parseFloat(input) < 0) ||
     (parseFloat(input) > lastValue.balance && selectedCoinA === "BRL") ||
     (parseFloat(input) > lastValue.busd && selectedCoinA === "BUSD") ||
     (parseFloat(input) > lastValue.btc && selectedCoinA === "BTC")

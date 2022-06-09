@@ -15,6 +15,16 @@
 
 <img height="320" src="https://user-images.githubusercontent.com/56081906/171480599-3158c3d7-7419-4804-83e4-21b355c02d58.gif" />
 
+## Funcionalidades 
+- É possível verificar saldo de cada moeda na conta
+- Ver cotação do Bitcoin
+- Quando o valor no primeiro campo de input é digitado podemos ver o valor convertido no campo seguinte
+- Comprar criptomoedas usando real
+- Vender Bitcoin e receber em BUSD
+- Vender BUSD e receber Bitcoin
+- Verificar o histórico das transações
+- Ao atualizar a página os valores são mantidos
+
 ## Objetivos
 - Realizar cadastro
 - Realizar login e logout
